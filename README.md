@@ -1,13 +1,23 @@
-## Hi there 👋
+## about repo 👋
 
-Here are some ideas to get you started:
+- repo: https://github.com/chengzao
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
-- https://github.com/chengzao
+- bio: A front-end  Web  developer
+
+- repositories: 18
+
+## latest updated
+
+
+
+- [chengzao](https://github.com/chengzao/chengzao) : 2020-07-26T15:05:51Z
+
+
+
+- [guide](https://github.com/chengzao/guide) : 2020-07-23T02:11:13Z
+
+
+
+- [vue-demo](https://github.com/chengzao/vue-demo) : 2020-07-22T07:16:59Z
+
+

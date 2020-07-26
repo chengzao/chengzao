@@ -5,14 +5,18 @@ const template = require("art-template");
 const axios = require("axios");
 require("dotenv").config();
 
-// https://developer.github.com/v4/explorer/
+// @url: https://developer.github.com/v4/explorer/
 const GITHUB_URL = "https://api.github.com/graphql";
+
+// @url: https://github.com/settings/tokens
 const TOKEN = process.env.ACCESS_TOKEN;
+const USER = "chengzao";
 
 const tpl = path.join(__dirname, "./template/README.md");
 const outputDir = path.join(__dirname, "./output/README.md");
 const rootDir = path.join(__dirname, "./README.md");
 
+// read file
 const tplContent = fs.readFileSync(tpl, { encoding: "utf-8" });
 
 function request(data, headers = {}) {
@@ -31,9 +35,17 @@ const fetcher = (variables, token) => {
       query userInfo($login: String!) {
         user(login: $login) {
             bio
-            avatarUrl(size: 10)
-            name
             url
+        }
+        viewer {
+          repositories(orderBy: {field: UPDATED_AT, direction: DESC}, first: 3) {
+            totalCount
+            nodes {
+              name
+              url
+              updatedAt
+            }
+          }
         }
       }
       `,
@@ -45,18 +57,27 @@ const fetcher = (variables, token) => {
   );
 };
 
-fetcher({ login: "chengzao" }, TOKEN)
+fetcher({ login: USER }, TOKEN)
   .then((res) => {
     const rs = res.data.data;
+    const repositories = rs.viewer.repositories;
+
+    // render data
     const outputContent = template.render(tplContent, {
       url: rs.user.url,
-      avatarUrl: rs.user.avatarUrl,
+      bio: rs.user.bio,
+      totalCount: repositories.totalCount,
+      nodes: repositories.nodes,
     });
 
+    // write file
     fs.writeFileSync(outputDir, outputContent, { encoding: "utf-8" });
+
+    // exist file
     const isExistsFile = fs.existsSync(outputDir);
 
     if (isExistsFile) {
+      // copy file
       fs.copyFileSync(outputDir, rootDir);
     }
   })
