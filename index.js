@@ -65,8 +65,8 @@ fetcher({ login: USER }, TOKEN)
     // render data
     const outputContent = template.render(tplContent, {
       url: rs.user.url,
+      user: USER,
       bio: rs.user.bio,
-      totalCount: repositories.totalCount,
       nodes: repositories.nodes,
     });
 

@@ -1,10 +1,12 @@
 ## about repo 👋
 
-- repo: {{ url }}
+- Home: [chengzao](https://github.com/chengzao)
 
-- bio: {{ bio }}
+- Repositories: [repositories](https://github.com/chengzao?tab=repositories)
 
-- repositories: {{ totalCount }}
+- Stars: [stars repo](https://github.com/chengzao?tab=stars)
+
+- Trending: [trending](https://github.com/trending)
 
 ## latest updated
 
