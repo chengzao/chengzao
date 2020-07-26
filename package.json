@@ -1,0 +1,25 @@
+{
+  "name": "chengzao",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chengzao/chengzao.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chengzao/chengzao/issues"
+  },
+  "homepage": "https://github.com/chengzao/chengzao#readme",
+  "dependencies": {
+    "art-template": "^4.13.2",
+    "axios": "^0.19.2",
+    "dotenv": "^8.2.0"
+  }
+}
