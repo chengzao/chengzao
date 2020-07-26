@@ -1,16 +1,18 @@
 ## about repo 👋
 
-- repo: https://github.com/chengzao
+- Home: [chengzao](https://github.com/chengzao)
 
-- bio: A front-end  Web  developer
+- Repositories: [repositories](https://github.com/chengzao?tab=repositories)
 
-- repositories: 18
+- Stars: [stars repo](https://github.com/chengzao?tab=stars)
+
+- Trending: [trending](https://github.com/trending)
 
 ## latest updated
 
 
 
-- [chengzao](https://github.com/chengzao/chengzao) : 2020-07-26T15:05:51Z
+- [chengzao](https://github.com/chengzao/chengzao) : 2020-07-26T16:19:03Z
 
 
 
