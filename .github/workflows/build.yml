@@ -25,11 +25,11 @@ jobs:
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
 
-      - name: Deploy to GitHub Pages
+      - name: Deploy to GitHub
         if: success()
         uses: crazy-max/ghaction-github-pages@v2
         with:
           target_branch: master
           build_dir: output
         env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
