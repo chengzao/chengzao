@@ -1,25 +1,24 @@
-## about repo 👋
+<p align="right">update🕛：2020/08/01 13:42:28</p>
 
-- Home: [chengzao](https://github.com/chengzao)
+## Home 👋
 
+- Home: [@chengzao](https://github.com/chengzao)
 - Repositories: [repositories](https://github.com/chengzao?tab=repositories)
-
 - Stars: [stars repo](https://github.com/chengzao?tab=stars)
-
 - Trending: [trending](https://github.com/trending)
 
-## latest updated
+## Latest News💬
 
 
 
-- [chengzao](https://github.com/chengzao/chengzao) : 2020-08-01T12:20:24Z
+- [chengzao](https://github.com/chengzao/chengzao) : 2020/08/01 13:42:16
 
 
 
-- [learn](https://github.com/chengzao/learn) : 2020-07-31T10:58:33Z
+- [learn](https://github.com/chengzao/learn) : 2020/07/31 10:58:33
 
 
 
-- [guide](https://github.com/chengzao/guide) : 2020-07-30T10:49:20Z
+- [guide](https://github.com/chengzao/guide) : 2020/07/30 10:49:20
 
 

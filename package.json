@@ -10,7 +10,10 @@
     "type": "git",
     "url": "git+https://github.com/chengzao/chengzao.git"
   },
-  "keywords": ["actions", "chengzao"],
+  "keywords": [
+    "actions",
+    "chengzao"
+  ],
   "author": "chengzao",
   "license": "ISC",
   "bugs": {
