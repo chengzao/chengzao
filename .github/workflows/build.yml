@@ -31,5 +31,6 @@ jobs:
         with:
           target_branch: master
           build_dir: output
+          commit_message: 'Updated by GitHub Actions'
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
