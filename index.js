@@ -63,7 +63,7 @@ async function publishReadme () {
   await exec.exec('git', ['config', '--global', 'user.email', '"czhlink@163.com"']);
   await exec.exec('git', ['add', 'README.md']);
   await exec.exec('git', ['commit', '-am', 'CI Update: README.md']);
-  await exec.exec('git', ['remote', 'add', 'origin', `https://${GH_REF}`]);
+  // await exec.exec('git', ['remote', 'add', 'origin', `https://${GH_REF}`]);
   await exec.exec('git', ['push', '--force', '--quiet', `https://${TOKEN}@${GH_REF}`, 'master']);
 }
 
@@ -120,7 +120,7 @@ fetcher({ login: 'chengzao' }, TOKEN)
     if (isExistsFile) {
       // copy output/readme.md file to root dir
       fs.copyFileSync(outputDir, rootDir);
-
+      console.log('build successed!')
       try {
         publishReadme()
       } catch (error) {
