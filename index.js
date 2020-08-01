@@ -94,6 +94,7 @@ fetcher({ login: USER }, TOKEN)
     await exec.exec('git', ['--version']);
     await exec.exec('git', ['config', '--global', 'user.name', '"chengzao"']);
     await exec.exec('git', ['config', '--global', 'user.email', '"czhlink@163.com"']);
+    await exec.exec('git', ['add', 'README.md']);
     await exec.exec('git', ['commit','-am', 'Update: README.md']);
     await exec.exec('git', ['push', 'origin', 'master']);
   }
