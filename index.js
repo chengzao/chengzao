@@ -11,17 +11,22 @@ const GH_API = "https://api.github.com/graphql";
 
 // @url: https://github.com/settings/tokens
 const TOKEN = process.env.ACCESS_TOKEN;
-const GH_REF = "github.com/chengzao/chengzao.git";
 const TOPICS = require('./config');
+
+// mkdir output dir
+const outputDir = path.join(__dirname,'./output')
+if(!fs.existsSync(outputDir)){
+  fs.mkdirSync(outputDir)
+}
 
 // file path
 const tpl = path.join(__dirname, "./template/README.md");
-const outputDir = path.join(__dirname, "./output/README.md");
-
+const ouputPath = path.join(__dirname, "./output/README.md");
 
 // read readme tpl file
 const tplContent = fs.readFileSync(tpl, { encoding: "utf-8" });
 
+// request 
 function request(data, headers = {}) {
   return axios({
     url: GH_API,
@@ -100,7 +105,6 @@ fetcher({ login: 'chengzao' }, TOKEN)
     });
 
     // write readme.md content
-    fs.writeFileSync(outputDir, outputContent, { encoding: "utf-8" });
+    fs.writeFileSync(ouputPath, outputContent, { encoding: "utf-8" });
   })
   .catch((error) => console.log("error: ", error.message));
-
