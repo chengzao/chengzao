@@ -1,4 +1,4 @@
-<code><p align="right" style="font-size: 12px;">update🕛：{{runTime | dateFormat 'YYYY/MM/DD hh:mm:ss'}}</p></code>
+<code><p align="right" style="font-size: 12px;background:#ffffff;">update🕛：{{runTime | dateFormat 'YYYY/MM/DD hh:mm:ss'}}</p></code>
 
 **Hi, I'm Here 👋**
 
