@@ -12,9 +12,13 @@ const GH_API = "https://api.github.com/graphql";
 // @url: https://github.com/settings/tokens
 const TOKEN = process.env.ACCESS_TOKEN;
 const GH_REF = "github.com/chengzao/chengzao.git";
+const TOPICS = require('./config');
+
+// file path
 const tpl = path.join(__dirname, "./template/README.md");
 const outputDir = path.join(__dirname, "./output/README.md");
 const rootDir = path.join(__dirname, "./README.md");
+
 
 // read readme tpl file
 const tplContent = fs.readFileSync(tpl, { encoding: "utf-8" });
@@ -52,7 +56,17 @@ template.defaults.imports.dateFormat = function (time, fmt) {
   return fmt
 };
 
+// publish readme.md to github 
+async function publishReadme () {
+  await exec.exec('git', ['--version']);
+  await exec.exec('git', ['config', '--global', 'user.name', '"chengzao"']);
+  await exec.exec('git', ['config', '--global', 'user.email', '"czhlink@163.com"']);
+  await exec.exec('git', ['add', 'README.md']);
+  await exec.exec('git', ['commit', '-am', 'CI Update: README.md']);
+  await exec.exec('git', ['push', '--force', '--quiet', `https://${TOKEN}@${GH_REF}`, 'master']);
+}
 
+// fetch func
 const fetcher = (variables, token) => {
   return request(
     {
@@ -62,7 +76,7 @@ const fetcher = (variables, token) => {
             url
         }
         viewer {
-          repositories(orderBy: {field: UPDATED_AT, direction: DESC}, first: 3) {
+          repositories(orderBy: {field: UPDATED_AT, direction: DESC}, first: 4) {
             totalCount
             nodes {
               name
@@ -81,6 +95,7 @@ const fetcher = (variables, token) => {
   );
 };
 
+// do
 fetcher({ login: 'chengzao' }, TOKEN)
   .then((res) => {
     const rs = res.data.data;
@@ -90,8 +105,9 @@ fetcher({ login: 'chengzao' }, TOKEN)
     // template render data
     const outputContent = template.render(tplContent, {
       url: rs.user.url,
-      nodes: repositories.nodes,
-      runTime: runTime
+      nodes: repositories.nodes.slice(1),
+      runTime: runTime,
+      topics: TOPICS
     });
 
     // write readme.md content
@@ -113,11 +129,3 @@ fetcher({ login: 'chengzao' }, TOKEN)
   })
   .catch((error) => console.log("error: ", error.message));
 
-  async function publishReadme(){
-    await exec.exec('git', ['--version']);
-    await exec.exec('git', ['config', '--global', 'user.name', '"chengzao"']);
-    await exec.exec('git', ['config', '--global', 'user.email', '"czhlink@163.com"']);
-    await exec.exec('git', ['add', 'README.md']);
-    await exec.exec('git', ['commit','-am', 'CI Update: README.md']);
-    await exec.exec('git', ['push','--force', '--quiet', `https://${TOKEN}@${GH_REF}`,'master']);
-  }
