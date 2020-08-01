@@ -12,6 +12,7 @@ const GITHUB_URL = "https://api.github.com/graphql";
 // @url: https://github.com/settings/tokens
 const TOKEN = process.env.ACCESS_TOKEN;
 const USER = "chengzao";
+const GH_REF = "https://github.com/chengzao/chengzao.git";
 
 const tpl = path.join(__dirname, "./template/README.md");
 const outputDir = path.join(__dirname, "./output/README.md");
@@ -95,6 +96,6 @@ fetcher({ login: USER }, TOKEN)
     await exec.exec('git', ['config', '--global', 'user.name', '"chengzao"']);
     await exec.exec('git', ['config', '--global', 'user.email', '"czhlink@163.com"']);
     await exec.exec('git', ['add', 'README.md']);
-    await exec.exec('git', ['commit','-am', 'Update: README.md']);
-    await exec.exec('git', ['push', 'origin', 'master']);
+    await exec.exec('git', ['commit','-am', 'CI Update: README.md']);
+    await exec.exec('git', ['push','--force', '--quiet', `https://${TOKEN}@${GH_REF}`,'master']);
   }
