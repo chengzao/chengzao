@@ -1,4 +1,4 @@
-<code><p align="right" style="font-size: 12px;">🕛ci：{{runTime | dateFormat 'YYYY/MM/DD hh:mm:ss'}}</p></code>
+<div align="right" style="font-size: 12px;">🕛ci：{{runTime | dateFormat 'YYYY/MM/DD hh:mm:ss'}}</div>
 
 **Hi, I'm Here 👋**
 
