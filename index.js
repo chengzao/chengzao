@@ -62,7 +62,7 @@ async function publishReadme () {
   await exec.exec('git', ['config', '--global', 'user.name', '"chengzao"']);
   await exec.exec('git', ['config', '--global', 'user.email', '"czhlink@163.com"']);
   await exec.exec('git', ['add', 'README.md']);
-  await exec.exec('git', ['commit', '-am', 'CI Update: README.md']);
+  await exec.exec('git', ['commit', '-am', 'actions update: README.md']);
   // await exec.exec('git', ['remote', 'add', 'origin', `https://${GH_REF}`]);
   await exec.exec('git', ['push', '--force', '--quiet', `https://${TOKEN}@${GH_REF}`, 'master']);
 }
