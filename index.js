@@ -12,7 +12,7 @@ const GITHUB_URL = "https://api.github.com/graphql";
 // @url: https://github.com/settings/tokens
 const TOKEN = process.env.ACCESS_TOKEN;
 const USER = "chengzao";
-const GH_REF = "https://github.com/chengzao/chengzao.git";
+const GH_REF = "github.com/chengzao/chengzao.git";
 
 const tpl = path.join(__dirname, "./template/README.md");
 const outputDir = path.join(__dirname, "./output/README.md");
