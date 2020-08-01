@@ -17,7 +17,6 @@ const TOPICS = require('./config');
 // file path
 const tpl = path.join(__dirname, "./template/README.md");
 const outputDir = path.join(__dirname, "./output/README.md");
-const rootDir = path.join(__dirname, "./README.md");
 
 
 // read readme tpl file
@@ -55,17 +54,6 @@ template.defaults.imports.dateFormat = function (time, fmt) {
   }
   return fmt
 };
-
-// publish readme.md to github 
-async function publishReadme () {
-  await exec.exec('git', ['--version']);
-  await exec.exec('git', ['config', '--global', 'user.name', '"chengzao"']);
-  await exec.exec('git', ['config', '--global', 'user.email', '"czhlink@163.com"']);
-  await exec.exec('git', ['add', 'README.md']);
-  await exec.exec('git', ['commit', '-am', 'actions update: README.md']);
-  // await exec.exec('git', ['push','--force','--quiet', `https://${TOKEN}@${GH_REF}`, 'master']);
-  await exec.exec('git', ['subtree','push','--force','--quiet','--prefix=output', `https://${TOKEN}@${GH_REF}`, 'master']);
-}
 
 // fetch func
 const fetcher = (variables, token) => {
@@ -113,20 +101,6 @@ fetcher({ login: 'chengzao' }, TOKEN)
 
     // write readme.md content
     fs.writeFileSync(outputDir, outputContent, { encoding: "utf-8" });
-
-    // exist file
-    const isExistsFile = fs.existsSync(outputDir);
-
-    if (isExistsFile) {
-      // copy output/readme.md file to root dir
-      fs.copyFileSync(outputDir, rootDir);
-      console.log('build successed!')
-      try {
-        publishReadme()
-      } catch (error) {
-        console.log('run git error')
-      }
-    }
   })
   .catch((error) => console.log("error: ", error.message));
 
