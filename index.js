@@ -3,6 +3,7 @@ const path = require("path");
 // @url: https://aui.github.io/art-template/zh-cn/docs/api.html
 const template = require("art-template");
 const axios = require("axios");
+const exec = require('@actions/exec');
 require("dotenv").config();
 
 // @url: https://developer.github.com/v4/explorer/
@@ -79,6 +80,18 @@ fetcher({ login: USER }, TOKEN)
     if (isExistsFile) {
       // copy file
       fs.copyFileSync(outputDir, rootDir);
+
+      publishReadme()
     }
+  
+
+
   })
   .catch((error) => console.log("error: ", error.message));
+
+  async function publishReadme(){
+    await exec.exec('git', ['--version']);
+    await exec.exec('git', ['add', 'README.md']);
+    await exec.exec('git', ['commit','-am', 'Update: README.md']);
+    // await exec.exec('git', ['push', 'origin', 'master']);
+  }
