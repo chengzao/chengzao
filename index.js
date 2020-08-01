@@ -81,11 +81,12 @@ fetcher({ login: USER }, TOKEN)
       // copy file
       fs.copyFileSync(outputDir, rootDir);
 
-      publishReadme()
+      try {
+        publishReadme()
+      } catch (error) {
+        console.log('run git error')
+      }
     }
-  
-
-
   })
   .catch((error) => console.log("error: ", error.message));
 
@@ -93,5 +94,5 @@ fetcher({ login: USER }, TOKEN)
     await exec.exec('git', ['--version']);
     await exec.exec('git', ['add', 'README.md']);
     await exec.exec('git', ['commit','-am', 'Update: README.md']);
-    // await exec.exec('git', ['push', 'origin', 'master']);
+    await exec.exec('git', ['push', 'origin', 'master']);
   }
