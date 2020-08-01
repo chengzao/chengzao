@@ -3,10 +3,6 @@ const TOPICS_BASE = 'https://raw.githubusercontent.com/github/explore/80688e429a
 const TOPICS = [
   {
     url: TOPICS_BASE,
-    name: 'github-api'
-  },
-  {
-    url: TOPICS_BASE,
     name: 'javascript'
   },
   {
