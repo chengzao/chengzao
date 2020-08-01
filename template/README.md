@@ -1,16 +1,24 @@
-<p align="right">update🕛：{{runTime | dateFormat 'YYYY/MM/DD hh:mm:ss'}}</p>
+<p align="right"><small>update🕛：{{runTime | dateFormat 'YYYY/MM/DD hh:mm:ss'}}</small></p>
 
-## Home 👋
+**Hi, I'm Here 👋**
 
 - Home: [@chengzao](https://github.com/chengzao)
 - Repositories: [repositories](https://github.com/chengzao?tab=repositories)
 - Stars: [stars repo](https://github.com/chengzao?tab=stars)
 - Trending: [trending](https://github.com/trending)
 
-## Latest News💬
+**Latest News🔥**
 
-{{each nodes}}
+{{each nodes node}}
 
-- [{{$value.name}}]({{$value.url}}) : {{$value.updatedAt | dateFormat 'YYYY/MM/DD hh:mm:ss'}}
+- [{{node.name}}]({{node.url}}) : {{node.updatedAt | dateFormat 'YYYY/MM/DD hh:mm:ss'}}
 
 {{/each}}
+
+**Technical Skills💡**
+
+  {{each topics topic}}<code><img height="20" src="{{topic.url}}/{{topic.name}}/{{topic.name}}.png">&emsp;</code>{{/each}}
+
+**Connect with me**
+
+  <a href="mailto:czhlink@163.com">💌 With Mail@163</a>
