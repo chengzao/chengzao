@@ -11,6 +11,7 @@ const GH_API = "https://api.github.com/graphql";
 
 // @url: https://github.com/settings/tokens
 const TOKEN = process.env.ACCESS_TOKEN;
+const UTCCHINA = 8 * 3600 * 1000;
 const TOPICS = require('./config');
 
 // mkdir output dir
@@ -94,8 +95,9 @@ fetcher({ login: 'chengzao' }, TOKEN)
   .then((res) => {
     const rs = res.data.data;
     const repositories = rs.viewer.repositories;
-    const runTime = new Date()
-
+    let runTime = new Date();
+    const zoneOffset = Math.abs(runTime.getTimezoneOffset());
+    runTime = zoneOffset == 480 ? runTime : runTime + UTCCHINA;
     // template render data
     const outputContent = template.render(tplContent, {
       url: rs.user.url,

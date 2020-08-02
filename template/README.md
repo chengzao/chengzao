@@ -1,4 +1,4 @@
-<div align="right" style="font-size: 12px;">🕛up：{{runTime | dateFormat 'YYYY/MM/DD hh:mm:ss'}}</div>
+<div align="right" style="font-size: 12px;">🕛GMT+0800：{{runTime | dateFormat 'YYYY/MM/DD hh:mm:ss'}}</div>
 
 **Hi, I'm Here 👋**
 

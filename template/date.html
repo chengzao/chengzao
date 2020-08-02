@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Date UTC</title>
+</head>
+<body>
+  <script>
+    let date = new Date()
+    let utcDate = date.toUTCString()
+    let isoDate = date.toISOString()
+    const zoneOffset = Math.abs(date.getTimezoneOffset());
+    let localDate = zoneOffset == 480 ? date : date + UTCCHINA;
+
+    console.log('zoneOffset: ', zoneOffset);
+    console.log('utc: ', utcDate);
+    console.log('iso: ', isoDate);
+    console.log('china localDate: ',localDate);
+  </script>
+</body>
+</html>
