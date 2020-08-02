@@ -98,6 +98,7 @@ fetcher({ login: 'chengzao' }, TOKEN)
     let runTime = new Date();
     const zoneOffset = Math.abs(runTime.getTimezoneOffset());
     runTime = zoneOffset == 480 ? runTime : runTime + UTCCHINA;
+    console.log('zoneOffset: ', zoneOffset, 'runTime: ', runTime)
     // template render data
     const outputContent = template.render(tplContent, {
       url: rs.user.url,
