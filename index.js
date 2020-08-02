@@ -101,7 +101,7 @@ fetcher({ login: 'chengzao' }, TOKEN)
     // template render data
     const outputContent = template.render(tplContent, {
       url: rs.user.url,
-      nodes: repositories.nodes.slice(1),
+      nodes: repositories.nodes.filter(item => item.name !== 'chengzao'),
       runTime: runTime,
       topics: TOPICS
     });
