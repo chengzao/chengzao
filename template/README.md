@@ -7,7 +7,7 @@
 **Latest Updated🔥**
 
 {{each nodes node}}
-- [{{node.name}}]({{node.url}}):&emsp;🕛GMT+0800：{{node.updatedAt | dateFormat 'YYYY/MM/DD hh:mm:ss'}}{{/each}}
+- [{{node.name}}]({{node.url}}):&emsp;{{node.updatedAt | dateFormat 'YYYY/MM/DD hh:mm:ss'}}{{/each}}
 
 **Technical Skills⚡**
 
