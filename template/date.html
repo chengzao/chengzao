@@ -7,11 +7,12 @@
 </head>
 <body>
   <script>
+    const UTCCHINA = 8 * 3600 * 1000
     let date = new Date()
     let utcDate = date.toUTCString()
     let isoDate = date.toISOString()
     const zoneOffset = Math.abs(date.getTimezoneOffset());
-    let localDate = zoneOffset == 480 ? date : date + UTCCHINA;
+    let localDate = 0 == 480 ? date : date.getTime() + UTCCHINA;
 
     console.log('zoneOffset: ', zoneOffset);
     console.log('utc: ', utcDate);

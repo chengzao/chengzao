@@ -97,8 +97,7 @@ fetcher({ login: 'chengzao' }, TOKEN)
     const repositories = rs.viewer.repositories;
     let runTime = new Date();
     const zoneOffset = Math.abs(runTime.getTimezoneOffset());
-    runTime = zoneOffset == 480 ? runTime : runTime + UTCCHINA;
-    console.log('zoneOffset: ', zoneOffset, 'runTime: ', runTime)
+    runTime = zoneOffset == 480 ? runTime : runTime.getTime() + UTCCHINA;
     // template render data
     const outputContent = template.render(tplContent, {
       url: rs.user.url,
