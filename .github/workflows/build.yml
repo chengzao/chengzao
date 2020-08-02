@@ -5,7 +5,7 @@ on:
     branches:
       - dev
   schedule:
-    - cron: "0 21 * * *"
+    - cron: "* 8 * * *" # Generate cron at https://crontab.guru/
 
 jobs:
   build:
