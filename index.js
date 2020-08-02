@@ -14,6 +14,9 @@ const TOKEN = process.env.ACCESS_TOKEN;
 const UTCCHINA = 8 * 3600 * 1000;
 const TOPICS = require('./config');
 
+// @return minutes
+const ZONEOFFSET = Math.abs(new Date().getTimezoneOffset());
+
 // mkdir output dir
 const outputDir = path.join(__dirname,'./output')
 if(!fs.existsSync(outputDir)){
@@ -39,8 +42,9 @@ function request(data, headers = {}) {
 
 // @url:https://aui.github.io/art-template/zh-cn/docs/syntax.html
 template.defaults.imports.dateFormat = function (time, fmt) {
-  var date = new Date(time)
-  var o = {
+  let chinaLocal = ZONEOFFSET == 480 ? time : new Date(time).getTime() + UTCCHINA
+  let date = new Date(chinaLocal)
+  let o = {
     'Y+': date.getFullYear(), // year
     'M+': date.getMonth() + 1, // month
     'D+': date.getDate(), // day
@@ -50,7 +54,7 @@ template.defaults.imports.dateFormat = function (time, fmt) {
     'q+': Math.floor((date.getMonth() + 3) / 3), // quarterly
     S: date.getMilliseconds(), // Millisecond
   }
-  for (var k in o) {
+  for (let k in o) {
     if (new RegExp('(' + k + ')').test(fmt)) {
       fmt = fmt.replace(
         RegExp.$1,
@@ -96,8 +100,7 @@ fetcher({ login: 'chengzao' }, TOKEN)
     const rs = res.data.data;
     const repositories = rs.viewer.repositories;
     let runTime = new Date();
-    const zoneOffset = Math.abs(runTime.getTimezoneOffset());
-    runTime = zoneOffset == 480 ? runTime : runTime.getTime() + UTCCHINA;
+    runTime = ZONEOFFSET == 480 ? runTime : runTime.getTime() + UTCCHINA;
     // template render data
     const outputContent = template.render(tplContent, {
       url: rs.user.url,
