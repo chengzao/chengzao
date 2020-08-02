@@ -102,9 +102,11 @@ fetcher({ login: 'chengzao' }, TOKEN)
     let runTime = new Date();
     runTime = ZONEOFFSET == 480 ? runTime : runTime.getTime() + UTCCHINA;
     // template render data
+    let nodes = repositories.nodes.filter(item => item.name !== 'chengzao')
+    nodes = nodes.length == 4 ? nodes.slice(0,3) : nodes;
     const outputContent = template.render(tplContent, {
       url: rs.user.url,
-      nodes: repositories.nodes.filter(item => item.name !== 'chengzao'),
+      nodes: nodes,
       runTime: runTime,
       topics: TOPICS
     });
