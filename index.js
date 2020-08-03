@@ -16,7 +16,7 @@ const TOPICS = require('./config');
 
 // @return minutes
 const ZONEOFFSET = Math.abs(new Date().getTimezoneOffset());
-
+console.log('ZONEOFFSET: ', ZONEOFFSET);
 // mkdir output dir
 const outputDir = path.join(__dirname,'./output')
 if(!fs.existsSync(outputDir)){
@@ -44,7 +44,6 @@ function request(data, headers = {}) {
 template.defaults.imports.dateFormat = function (time, fmt) {
   let chinaLocal = ZONEOFFSET == 480 ? time : new Date(time).getTime() + UTCCHINA
   let date = new Date(chinaLocal)
-  console.log('ZONEOFFSET', ZONEOFFSET, 'chinaLocal', chinaLocal);
   let o = {
     'Y+': date.getFullYear(), // year
     'M+': date.getMonth() + 1, // month
@@ -101,14 +100,15 @@ fetcher({ login: 'chengzao' }, TOKEN)
     const rs = res.data.data;
     const repositories = rs.viewer.repositories;
     let runTime = new Date();
-    runTime = ZONEOFFSET == 480 ? runTime : runTime.getTime() + UTCCHINA;
+    let localTime = ZONEOFFSET == 480 ? runTime : runTime.getTime() + UTCCHINA;
+    console.log('runTime', runTime, 'localTime', localTime);
     // template render data
     let nodes = repositories.nodes.filter(item => item.name !== 'chengzao')
     nodes = nodes.length == 4 ? nodes.slice(0,3) : nodes;
     const outputContent = template.render(tplContent, {
       url: rs.user.url,
       nodes: nodes,
-      runTime: runTime,
+      runTime: localTime,
       topics: TOPICS
     });
 
