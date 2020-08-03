@@ -1,36 +1,40 @@
-// @url: https://github.com/topics
-const TOPICS_BASE = 'https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/topics'
+const GITEE_BASE = 'https://gitee.com/cxyz/imgbed/raw/img'
+
 const TOPICS = [
   {
-    url: TOPICS_BASE,
+    url: `${GITEE_BASE}/2020/08/html.png`,
     name: 'html'
   },
   {
-    url: TOPICS_BASE,
+    url: `${GITEE_BASE}/2020/08/javascript.png`,
     name: 'javascript'
   },
   {
-    url: TOPICS_BASE,
+    url: `${GITEE_BASE}/2020/08/vue.png`,
     name: 'vue'
   },
   {
-    url: TOPICS_BASE,
+    url: `${GITEE_BASE}/2020/08/react.png`,
     name: 'react'
   },
   {
-    url: TOPICS_BASE,
+    url: `${GITEE_BASE}/2020/08/wxminapp.png`,
+    name: '微信小程序'
+  },
+  {
+    url: `${GITEE_BASE}/2020/08/nodejs.png`,
     name: 'nodejs'
   },
   {
-    url: TOPICS_BASE,
+    url: `${GITEE_BASE}/2020/08/webpack.png`,
     name: 'webpack'
   },
   {
-    url: TOPICS_BASE,
+    url: `${GITEE_BASE}/2020/08/sass.png`,
     name: 'sass'
   },
   {
-    url: TOPICS_BASE,
+    url: `${GITEE_BASE}/2020/08/git.png`,
     name: 'git'
   },
 ]
