@@ -11,6 +11,6 @@
 
 **Technical Skills⚡**
 
-  {{each topics topic}}{{@ topic.svg}}&emsp; {{/each}}
+  {{each topics topic}}<code><img height="20" title="{{topic.name}}" alt="{{topic.name}}" src="{{topic.url}}/{{topic.name}}/{{topic.name}}.png">&emsp;</code>{{/each}}
 
 **Connect with me💖** [![mail Badge](https://img.shields.io/badge/-@163.com-c14438?style=flat&logo=Gmail&logoColor=white&link=mailto:czhlink@163.com)](mailto:czhlink@163.com)
