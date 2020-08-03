@@ -44,6 +44,7 @@ function request(data, headers = {}) {
 template.defaults.imports.dateFormat = function (time, fmt) {
   let chinaLocal = ZONEOFFSET == 480 ? time : new Date(time).getTime() + UTCCHINA
   let date = new Date(chinaLocal)
+  console.log('ZONEOFFSET', ZONEOFFSET, 'chinaLocal', chinaLocal);
   let o = {
     'Y+': date.getFullYear(), // year
     'M+': date.getMonth() + 1, // month
