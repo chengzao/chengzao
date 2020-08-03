@@ -100,15 +100,14 @@ fetcher({ login: 'chengzao' }, TOKEN)
     const rs = res.data.data;
     const repositories = rs.viewer.repositories;
     let runTime = new Date();
-    let localTime = ZONEOFFSET == 480 ? runTime : runTime.getTime() + UTCCHINA;
-    console.log('runTime', runTime, 'localTime', localTime);
+    console.log('runtime: ', runTime)
     // template render data
     let nodes = repositories.nodes.filter(item => item.name !== 'chengzao')
     nodes = nodes.length == 4 ? nodes.slice(0,3) : nodes;
     const outputContent = template.render(tplContent, {
       url: rs.user.url,
       nodes: nodes,
-      runTime: localTime,
+      runTime: runTime,
       topics: TOPICS
     });
 
