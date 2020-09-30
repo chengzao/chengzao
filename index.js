@@ -21,7 +21,7 @@ console.log('ZONEOFFSET: ', ZONEOFFSET);
 const tpl = path.join(__dirname, "./template/README.md");
 const ouputPath = path.join(__dirname, "./output/README.md");
 const corn_yml = path.join(__dirname,'./template/corn.yml')
-const workflow_dir = path.join(__dirname,'./output/.github/workflow')
+const workflow_dir = path.join(__dirname,'./output/.github/workflows')
 
 // mkdir output dir
 function mkdirsSync(dirname) {  
