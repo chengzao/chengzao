@@ -3,7 +3,6 @@ const path = require("path");
 // @url: https://aui.github.io/art-template/zh-cn/docs/api.html
 const template = require("art-template");
 const axios = require("axios");
-const exec = require('@actions/exec');
 require("dotenv").config();
 
 // @url: https://developer.github.com/v4/explorer/
@@ -17,15 +16,31 @@ const TOPICS = require('./config');
 // @return minutes
 const ZONEOFFSET = Math.abs(new Date().getTimezoneOffset());
 console.log('ZONEOFFSET: ', ZONEOFFSET);
-// mkdir output dir
-const outputDir = path.join(__dirname,'./output')
-if(!fs.existsSync(outputDir)){
-  fs.mkdirSync(outputDir)
-}
 
 // file path
 const tpl = path.join(__dirname, "./template/README.md");
 const ouputPath = path.join(__dirname, "./output/README.md");
+const corn_yml = path.join(__dirname,'./template/corn.yml')
+const workflow_dir = path.join(__dirname,'./output/.github/workflow')
+
+// mkdir output dir
+function mkdirsSync(dirname) {  
+  if (fs.existsSync(dirname)) {  
+      return true;  
+  } else {  
+      if (mkdirsSync(path.dirname(dirname))) {  
+          fs.mkdirSync(dirname);  
+          return true;  
+      }  
+  }
+}
+
+try {
+  mkdirsSync(workflow_dir)
+  fs.copyFileSync(corn_yml, path.join(workflow_dir, 'corn.yml'))
+} catch (error) {
+  console.log('mkdir init error.')
+}
 
 // read readme tpl file
 const tplContent = fs.readFileSync(tpl, { encoding: "utf-8" });
