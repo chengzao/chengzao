@@ -8,36 +8,36 @@ const TOPICS_BASE =
 const TOPICS = [
   {
     url: `${TOPICS_BASE}/html.png`,
-    name: 'html'
+    name: "html",
   },
   {
     url: `${TOPICS_BASE}/javascript.png`,
-    name: 'javascript'
+    name: "javascript",
   },
   {
     url: `${TOPICS_BASE}/vue.png`,
-    name: 'vue'
+    name: "vue",
   },
   {
     url: `${TOPICS_BASE}/react.png`,
-    name: 'react'
+    name: "react",
   },
   {
-    url: `${GITEE_BASE}/wxminapp.png`,
-    name: '微信小程序'
+    url: `${TOPICS_BASE}/wxminapp.png`,
+    name: "微信小程序",
   },
   {
     url: `${TOPICS_BASE}/nodejs.png`,
-    name: 'nodejs'
+    name: "nodejs",
   },
   {
     url: `${TOPICS_BASE}/webpack.png`,
-    name: 'webpack'
+    name: "webpack",
   },
   {
     url: `${TOPICS_BASE}/git.png`,
-    name: 'git'
+    name: "git",
   },
-]
+];
 
 module.exports = TOPICS
