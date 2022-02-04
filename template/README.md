@@ -1,4 +1,4 @@
-<div align="right" style="font-size: 12px;">{{runTime | dateFormat 'YYYY/MM/DD hh:mm:ss'}}</div>
+<div align="right" size="12" style="font-size: 12px;">{{runTime | dateFormat 'YYYY/MM/DD'}}</div>
 
 **Hi, Welcome My Home 👋**
 
@@ -7,7 +7,7 @@
 **Latest Updated Repo🔥**
 
 {{each nodes node}}
-- [{{node.name}}]({{node.url}}):&emsp;{{node.updatedAt | dateFormat 'YYYY/MM/DD hh:mm:ss'}}{{/each}}
+- [{{node.name}}]({{node.url}}):&emsp;{{node.updatedAt | dateFormat 'YYYY/MM/DD'}}{{/each}}
 
 **Technical Skills⚡**
 
