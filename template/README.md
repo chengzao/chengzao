@@ -13,4 +13,4 @@
 
   {{each topics topic}}<code><img height="20" title="{{topic.name}}" alt="{{topic.name}}" src="{{topic.url}}" />&emsp;</code>{{/each}}
 
-**Started with me💖**
+**Stared with me💖**
