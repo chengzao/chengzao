@@ -2,7 +2,7 @@ name: Schedule Corn
 
 on:
   schedule:
-    - cron: '0 8 * * *'
+    - cron: "0 8 * * *"
 
 jobs:
   build:
@@ -27,8 +27,8 @@ jobs:
         if: success()
         uses: crazy-max/ghaction-github-pages@v2
         with:
-          target_branch: master
+          target_branch: main
           build_dir: output
-          commit_message: 'Updated by GitHub Actions'
+          commit_message: "Updated by GitHub Actions"
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}

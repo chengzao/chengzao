@@ -1,10 +1,11 @@
 {
-  "name": "chengzao",
+  "name": "@chengzao/readme",
   "version": "1.0.1",
   "description": "about readme",
   "main": "index.js",
   "scripts": {
-    "build": "node ./index.js"
+    "clean": "rimraf -rf output",
+    "build": "npm run clean && node ./index.js"
   },
   "repository": {
     "type": "git",
@@ -22,7 +23,11 @@
   "homepage": "https://github.com/chengzao/chengzao#readme",
   "dependencies": {
     "art-template": "^4.13.2",
-    "axios": "^0.19.2",
-    "dotenv": "^8.2.0"
+    "axios": "^0.25.0",
+    "dayjs": "^1.10.7"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.0",
+    "rimraf": "^3.0.2"
   }
 }

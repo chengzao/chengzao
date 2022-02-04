@@ -3,6 +3,7 @@ const path = require("path");
 // @url: https://aui.github.io/art-template/zh-cn/docs/api.html
 const template = require("art-template");
 const axios = require("axios");
+const dayjs = require('dayjs');
 require("dotenv").config();
 
 // @url: https://developer.github.com/v4/explorer/
@@ -10,12 +11,7 @@ const GH_API = "https://api.github.com/graphql";
 
 // @url: https://github.com/settings/tokens
 const TOKEN = process.env.ACCESS_TOKEN;
-const UTCCHINA = 8 * 3600 * 1000;
 const TOPICS = require('./config');
-
-// @return minutes
-const ZONEOFFSET = Math.abs(new Date().getTimezoneOffset());
-console.log('ZONEOFFSET: ', ZONEOFFSET);
 
 // file path
 const tpl = path.join(__dirname, "./template/README.md");
@@ -24,11 +20,11 @@ const corn_yml = path.join(__dirname,'./template/corn.yml')
 const workflow_dir = path.join(__dirname,'./output/.github/workflows')
 
 // mkdir output dir
-function mkdirsSync(dirname) {  
+function mkdirSync(dirname) {  
   if (fs.existsSync(dirname)) {  
       return true;  
   } else {  
-      if (mkdirsSync(path.dirname(dirname))) {  
+      if (mkdirSync(path.dirname(dirname))) {  
           fs.mkdirSync(dirname);  
           return true;  
       }  
@@ -36,7 +32,7 @@ function mkdirsSync(dirname) {
 }
 
 try {
-  mkdirsSync(workflow_dir)
+  mkdirSync(workflow_dir)
   fs.copyFileSync(corn_yml, path.join(workflow_dir, 'corn.yml'))
 } catch (error) {
   console.log('mkdir init error.')
@@ -57,76 +53,53 @@ function request(data, headers = {}) {
 
 // @url:https://aui.github.io/art-template/zh-cn/docs/syntax.html
 template.defaults.imports.dateFormat = function (time, fmt) {
-  let chinaLocal = ZONEOFFSET == 480 ? time : new Date(time).getTime() + UTCCHINA
-  let date = new Date(chinaLocal)
-  let o = {
-    'Y+': date.getFullYear(), // year
-    'M+': date.getMonth() + 1, // month
-    'D+': date.getDate(), // day
-    'h+': date.getHours(), // hour
-    'm+': date.getMinutes(), // minutes
-    's+': date.getSeconds(), // seconds
-    'q+': Math.floor((date.getMonth() + 3) / 3), // quarterly
-    S: date.getMilliseconds(), // Millisecond
-  }
-  for (let k in o) {
-    if (new RegExp('(' + k + ')').test(fmt)) {
-      fmt = fmt.replace(
-        RegExp.$1,
-        o[k] < 10 ? '0' + o[k] : o[k],
-      )
+  return dayjs(time).format(fmt)
+};
+
+const query = `
+  query userInfo($login: String!, $num: Int!) {
+    user(login: $login) {
+        url
+    }
+    viewer {
+      list:repositories(orderBy: {field: UPDATED_AT, direction: DESC}, first: $num, privacy: PUBLIC) {
+        totalCount
+        nodes {
+          name
+          url
+          isPrivate
+          updatedAt
+        }
+      }
     }
   }
-  return fmt
-};
+  `
 
 // fetch func
 const fetcher = (variables, token) => {
-  return request(
-    {
-      query: `
-      query userInfo($login: String!) {
-        user(login: $login) {
-            url
-        }
-        viewer {
-          repositories(orderBy: {field: UPDATED_AT, direction: DESC}, first: 4) {
-            totalCount
-            nodes {
-              name
-              url
-              updatedAt
-            }
-          }
-        }
-      }
-      `,
-      variables,
-    },
-    {
-      Authorization: `bearer ${token}`,
-    }
-  );
+  return request({query,variables},{Authorization: `bearer ${token}`});
 };
 
-// do
-fetcher({ login: 'chengzao' }, TOKEN)
-  .then((res) => {
-    const rs = res.data.data;
-    const repositories = rs.viewer.repositories;
-    let runTime = new Date();
-    console.log('runtime: ', runTime)
-    // template render data
-    let nodes = repositories.nodes.filter(item => item.name !== 'chengzao')
-    nodes = nodes.length == 4 ? nodes.slice(0,3) : nodes;
-    const outputContent = template.render(tplContent, {
-      url: rs.user.url,
-      nodes: nodes,
-      runTime: runTime,
-      topics: TOPICS
-    });
+async function run() {
+    try {
+      const res = await fetcher({ login: 'chengzao', num: 5 }, TOKEN)
+      const rs = res.data.data;
+      const repositories = rs.viewer.list;
+      let runTime = new Date();
+      // template render data
+      let nodes = repositories.nodes.filter(item => item.name !== 'chengzao')
+      nodes = nodes.length > 3 ? nodes.slice(0,3) : nodes;
+      const outputContent = template.render(tplContent, {
+        url: rs.user.url,
+        nodes: nodes,
+        runTime: runTime,
+        topics: TOPICS
+      });
+      // write readme.md content
+      fs.writeFileSync(ouputPath, outputContent, { encoding: "utf-8" });
+    } catch (error) {
+      throw new Error('runTime: ',error.message)
+    }
+}
 
-    // write readme.md content
-    fs.writeFileSync(ouputPath, outputContent, { encoding: "utf-8" });
-  })
-  .catch((error) => console.log("error: ", error.message));
+run()
