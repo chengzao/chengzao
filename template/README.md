@@ -1,10 +1,10 @@
-<div align="right" size="12" style="font-size: 12px;">{{runTime | dateFormat 'YYYY/MM/DD'}}</div>
+<div align="right" style="font-size:12px">{{runTime | dateFormat 'YYYY/MM/DD'}}</div>
 
-**Hi, Welcome My Home 👋**
+**Welcome My Home👋**
 
 🏠[Home](https://github.com/chengzao)&emsp;|&emsp;🌴[Repositories](https://github.com/chengzao?tab=repositories)&emsp;|&emsp;⭐[Stars](https://github.com/chengzao?tab=stars)
 
-**Latest Updated Repo🔥**
+**Latest Updated🔥**
 
 {{each nodes node}}
 
@@ -14,4 +14,4 @@
 
   {{each topics topic}}<code><img height="20" title="{{topic.name}}" alt="{{topic.name}}" src="{{topic.url}}" />&emsp;</code>{{/each}}
 
-**Started with me💖**
+**Stared with me💖**
