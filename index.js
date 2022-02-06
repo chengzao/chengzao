@@ -62,13 +62,15 @@ const query = `
         url
     }
     viewer {
-      list:repositories(orderBy: {field: UPDATED_AT, direction: DESC}, first: $num, privacy: PUBLIC) {
+      list:repositories(orderBy: {field: PUSHED_AT, direction: DESC}, first: $num, privacy: PUBLIC, isFork: false) {
         totalCount
         nodes {
           name
           url
-          isPrivate
-          updatedAt
+          pushedAt
+          object(expression: "HEAD"){
+            commitUrl
+          }
         }
       }
     }
@@ -89,6 +91,15 @@ async function run() {
       // template render data
       let nodes = repositories.nodes.filter(item => item.name !== 'chengzao')
       nodes = nodes.length > 3 ? nodes.slice(0,3) : nodes;
+      nodes = nodes.map(item => {
+        return {
+          name: item.name,
+          url: item.url,
+          pushedAt: item.pushedAt,
+          commitUrl: item.object.commitUrl,
+          hash: item.object.commitUrl.split('/').pop().slice(0,7)
+        }
+      })
       const outputContent = template.render(tplContent, {
         url: rs.user.url,
         nodes: nodes,

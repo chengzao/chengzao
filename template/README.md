@@ -7,7 +7,8 @@
 **Latest Updated Repo🔥**
 
 {{each nodes node}}
-- [{{node.name}}]({{node.url}}):&emsp;{{node.updatedAt | dateFormat 'YYYY/MM/DD'}}{{/each}}
+
+- [{{node.name}}]({{node.url}}):&emsp;{{node.pushedAt | dateFormat 'YYYY/MM/DD'}} <img height="14" title="{{node.name}} commit hash" alt="{{node.name}} commit hash" src="https://img.shields.io/badge/commit-{{node.hash}}-brightgreen" /> {{/each}}
 
 **Technical Skills⚡**
 
