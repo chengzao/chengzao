@@ -92,6 +92,7 @@ async function run() {
       let nodes = repositories.nodes.filter(item => item.name !== 'chengzao')
       nodes = nodes.length > 3 ? nodes.slice(0,3) : nodes;
       nodes = nodes.map(item => {
+        console.log('name: ', item.name)
         return {
           name: item.name,
           url: item.url,
